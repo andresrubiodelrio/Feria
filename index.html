@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feria del Al-Andalus</title>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+   <!-- <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js">
+  </script>-->
+  <script src="https://unpkg.com/aframe-environment-component@1.3.0/dist/aframe-environment-component.min.js"></script>
+    <script src="libs/aframe-physics-system.min.js"></script>
+    <script src="logic/logic.js"></script>
+</head>
+
+<body>
+    <a-scene environment="preset: forest; dressing:mushrooms" pyshics="gravity: -1;">
+        <a-entity id="camrig"><!--look-controls wasd-controls-->
+            <!-- Controles -->
+            <a-entity id="camera" camera position="0 1.6 0"></a-entity>
+            <a-entity oculus-touch-controls="hand: left" thumbstick-movement collider-check raycaster="objects: .collidable; showLine: true"></a-entity>
+            <a-entity oculus-touch-controls="hand: right" thumbstick-camera collider-check raycaster="objects: .collidable; showLine: true"></a-entity>
+            
+            <a-text id="debugTxt" position="0.95 1.8 -3" scale="0.5 0.5 1" align="center" rotation="25 -35 0"
+                    value="VALUE" color="#ffffff" wrapcount="200" width="30"
+                    font="https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/cabin/Cabin-Medium.json"
+                    shader="msdf"></a-text>
+
+        </a-entity>
+        <a-assets>
+            <a-asset-item id="tent" src="models/tent.gltf"></a-asset-item>
+            <a-asset-item id="crate" src="models/crate.gltf"></a-asset-item>
+            <a-asset-item id="bowling-pin" src="models/bowling-pin.gltf"></a-asset-item>
+            <a-asset-item id="bucket" src="models/bucket.gltf"></a-asset-item>
+        </a-assets>
+        <!--Suelo-->
+        <a-box position="0 0 0" depth="100" width="100" height="0.1" static-body="shape: box; mass: 1"
+            visible="false"></a-box>
+
+       <!--Tienda-->
+        <a-gltf-model src="#tent" position="0 0 -5" scale="0.50 0.45 0.40"
+            static-body="shape: box mass: 1"></a-gltf-model>
+        <!--Caja-->
+        <a-gltf-model src="#crate" scale="2.45 0.75 0.5" static-body="shape: box" position="0 0.75 -7.3"></a-gltf-model>
+        <!-- Bolos-->
+        <a-gltf-model id="bowling-pin1" src="#bowling-pin" position="0 1.5 -7.3" scale="0.25 0.25 0.25"
+            static-body="shape: box; mass: 1"></a-gltf-model>
+        <a-gltf-model id="bowling-pin2" class="bowling-pin" src="#bowling-pin" position="-1 1.5 -7.3"
+            scale="0.25 0.25 0.25" static-body="shape: box; mass: 1"></a-gltf-model>
+        <a-gltf-model id="bowling-pin3" class="bowling-pin" src="#bowling-pin" position="-2 1.5 -7.3"
+            scale="0.25 0.25 0.25" static-body="shape: box; mass: 1"></a-gltf-model>
+        <a-gltf-model id="bowling-pin4" class="bowling-pin" src="#bowling-pin" position="1 1.5 -7.3"
+            scale="0.25 0.25 0.25" static-body="shape: box; mass: 1"></a-gltf-model>
+        <a-gltf-model id="bowling-pin5" class="bowling-pin" src="#bowling-pin" position="2 1.5 -7.3"
+            scale="0.25 0.25 0.25" static-body="shape: box; mass: 1"></a-gltf-model>
+
+        <!--Cubo-->
+        <a-gltf-model src="#bucket" position="2.5 0.5 -3" scale="2 2 2" gltf-model="models/bucket.gltf"
+            rotation="180 0 0" static-body="mass: 1"></a-gltf-model>
+        <!--Cesta-->
+        <a-gltf-model src="#basket" position="-0.8 0 -6" scale="0.2 0.2 0.2" gltf-model="models/basket.gltf" rotation=""
+            static-body="mass: 1"></a-gltf-model>
+        <!--Estanteria-->
+        <a-gltf-model src="#shelf" position="-4.2674 0 -5.14191" scale="" gltf-model="models/shelf.gltf"
+            rotation="0 90 0" static-body="mass: 1"></a-gltf-model>
+        <!--Board-->
+        <a-box position="0 1.2 -2.5" scale="1 0.1 1" color="brown" rotation="0 0 0" static-body="shape: box; mass: 1"></a-box>
+        <!--Contenedor-->
+        <a-gltf-model src="#dumpster" position="7 0 -6.5" scale="1 1 1" gltf-model="models/dumpster.gltf"
+            rotation="0 0 0" static-body="mass: 1"></a-gltf-model>
+        <!--Pelota-->
+      <a-sphere class="collidable" ball-detect scale="0.1 0.1 0.1" position="2.5 0.5 -3" color="red"
+            dynamic-body="shape: box; mass: 1"></a-sphere>
+        <!--Cesta-->
+        <a-sphere class="collidable" ball-detect scale="0.1 0.1 0.1" position="-0.915 0.170 -5.901" color="red"
+            dynamic-body="shape: box; mass: 1"></a-sphere>
+        <!--Estanteria-->
+        <a-sphere class="collidable" ball-detect scale="0.1 0.1 0.1" position="-4.280 0.250 -5.070" color="red"
+            dynamic-body="shape: box; mass: 1"></a-sphere>
+        <a-sphere position="-0 1.5 -2.5" ball-detect color="red" dynamic-body="shape: box; mass: 1" class="collidable" scale="0.1 0.1 0.1"></a-sphere>
+        
+       <a-sphere class="collidable" ball-detect scale="0.1 0.1 0.1" position="6.661 0.150 -7.7" color="red"
+            dynamic-body="shape: box; mass: 1"></a-sphere>
+
+
+    </a-scene>
+</body>
+
+</html>

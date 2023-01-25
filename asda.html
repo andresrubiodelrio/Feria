@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title> Ejemplo 54: Físicas con Oculus y AFrame</title>  
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.3.0/dist/aframe-environment-component.min.js"></script>
+    <script src="libs/aframe-physics-system.min.js"></script>
+    <script src="app.js"></script>
+  </head>
+  <body>
+    <a-scene physics="gravity: -1">
+      <a-box position="-1 2 -3" rotation="0 45 0" color="#4CC3D9" dynamic-body="shape: box; mass: 1"></a-box>
+      <a-sphere position="0 4 -5" radius="1.25" color="#EF2D5E" dynamic-body="shape: box; mass: 1"></a-sphere>
+      <a-cylinder position="1 2 -3" radius="0.5" height="1.5" color="#FFC65D" dynamic-body="shape: cylinder; mass: 1"></a-cylinder>
+      
+      <a-box position="0 0 0" depth="100" width="100" height="0.1" static-body="shape: box; mass: 1" visible="false"></a-box>
+      
+      <a-entity environment="preset: contact"></a-entity>
+      
+      <a-entity id="cameraRig">
+        <a-entity camera position="0 1.6 0">
+          <a-text value="debug" position="0 0 -3"></a-text>
+        </a-entity>
+        <a-entity oculus-touch-controls="hand: left" thumbstick-logging></a-entity>
+        <a-entity oculus-touch-controls="hand: right" thumbstick-logging></a-entity>
+      </a-entity>
+      
+      
+    </a-scene>
+  </body>
+</html>

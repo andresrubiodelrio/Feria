@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feria del Al-Andalus</title>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+    <script src="libs/aframe-physics-system.min.js"></script>
+    <script src="logic/logic.js"></script>
+</head>
+
+<body>
+    <a-scene environment="preset: forest; dressing:mushrooms" pyshics="gravity: -9.8; restitution: 0.7">
+        <!-- <a-entity  movement-controls="controls: checkpoint" checkpoint-controls="mode: teleport">
+            <a-entity camera position="0 1.6 0"></a-entity>
+            <a-entity oculus-touch-controls="hand: left"></a-entity>
+            <a-entity oculus-touch-controls="hand: right"></a-entity>
+        </a-entity> -->
+        <a-entity id="cam-rig" look-controls wasd-controls>
+            <!-- Controles -->
+            <a-entity camera position="0 1.6 0"></a-entity>
+            <a-entity oculus-touch-controls="hand: left"></a-entity>
+            <a-entity oculus-touch-controls="hand: right"></a-entity>
+            <!--Visor de puntos-->
+            <a-entity position="0.95 1.8 -1" scale="0.5 0.5 1" rotation="25 -35 0" text="value: \nBienvenid@ al juego de Feria del Al-Andalus\n;
+				  		color: #212121;
+				  		align: center;
+				  		wrapCount: 20;
+				  		width: 1;
+				  		font: https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/cabin/Cabin-Medium.json;
+				  		shader: msdf" geometry="primitive: plane; width: auto; height: auto"
+                material="color: #ffffff; shader: flat; visible: true" event-set__enter="_event: mouseenter;"
+                event-set__leave="_event: mouseleave;">
+
+            </a-entity>
+            <a-entity id="puntos" position="0.95 1.6 -1" scale="0.5 0.5 1" rotation="25 -35 0" text="value: \nPuntos:\n;
+				  		color: #ffffff;
+				  		align: center;
+				  		wrapCount: 20;
+				  		width: 1;
+				  		font: https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/cabin/Cabin-Medium.json;
+				  		shader: msdf" geometry="primitive: plane; width: auto; height: auto"
+                material="color: #000000; shader: flat; visible: true">
+            </a-entity>
+        </a-entity>
+        <a-assets>
+            <a-asset-item id="tent" src="models/tent.gltf"></a-asset-item>
+            <a-asset-item id="crate" src="models/crate.gltf"></a-asset-item>
+            <a-asset-item id="bowling-pin" src="models/bowling-pin.gltf"></a-asset-item>
+            <a-asset-item id="bucket" src="models/bucket.gltf"></a-asset-item>
+        </a-assets>
+        <!--Suelo-->
+        <a-box position="0 0 0" depth="100" width="100" height="0.1" static-body="shape: box; mass: 1"
+            visible="false"></a-box>
+
+        <!--Tienda-->
+        <a-gltf-model src="#tent" position="0 0 -5" scale="0.50 0.45 0.40"
+            static-body="shape: box; mass: 1"></a-gltf-model>
+        <!--Caja-->
+        <a-gltf-model src="#crate" scale="2.35 0.5 0.5" static-body="shape: auto" position="0 0.75 -7.3"></a-gltf-model>
+        <!-- Bolos-->
+        <a-gltf-model id="bowling-pin1" class="bowling-pin" src="#bowling-pin" position="0 3.3 -7.3"
+            scale="0.25 0.25 0.25" dynamic-body="shape: auto; mass: 1"></a-gltf-model>
+        <a-gltf-model id="bowling-pin2" class="bowling-pin" src="#bowling-pin" position="-1 1.3 -7.3"
+            scale="0.25 0.25 0.25" dynamic-body="shape: auto; mass: 1"></a-gltf-model>
+        <a-gltf-model id="bowling-pin3" class="bowling-pin" src="#bowling-pin" position="-2 1.3 -7.3"
+            scale="0.25 0.25 0.25" dynamic-body="shape: auto; mass: 1"></a-gltf-model>
+        <a-gltf-model id="bowling-pin4" class="bowling-pin" src="#bowling-pin" position="1 1.3 -7.3"
+            scale="0.25 0.25 0.25" dynamic-body="shape: auto; mass: 1"></a-gltf-model>
+        <a-gltf-model id="bowling-pin5" class="bowling-pin" src="#bowling-pin" position="2 1.3 -7.3"
+            scale="0.25 0.25 0.25" dynamic-body="shape: auto; mass: 1"></a-gltf-model>
+        <!--Cubo-->
+        <a-gltf-model src="#bucket" position="2.5 0.5 -3" scale="2 2 2" gltf-model="models/bucket.gltf"
+            rotation="180 0 0" dynamic-body="shape: auto; mass: 1"></a-gltf-model>
+        <!--Pelota-->
+        <a-sphere class="ball" ball-detect scale="0.1 0.1 0.1" position="2.5 0.5 -3" color="red"
+            dynamic-body="shape: auto; mass: 1"></a-sphere>
+        <a-sphere class="ball" ball-detect scale="0.1 0.1 0.1" position="-1.1 2.4 -7.3" color="red"
+            dynamic-body="shape: auto; mass: 1"></a-sphere>
+
+    </a-scene>
+</body>
+
+</html>
